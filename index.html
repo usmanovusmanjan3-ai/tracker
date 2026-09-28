@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaxsiy Moliya Hisoblagichi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- YON MENYU -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>V</span>
+            <div>
+                <h2>VELORA</h2>
+                <small>MOLIYA</small>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-item active" data-section="dashboard">
+                <span>⌂</span>
+                Bosh sahifa
+            </button>
+
+            <button class="nav-item" data-section="transactions">
+                <span>↔</span>
+                Tranzaksiyalar
+            </button>
+
+            <button class="nav-item" data-section="analytics">
+                <span>◈</span>
+                Tahlil
+            </button>
+
+            <button class="nav-item" data-section="categories">
+                <span>▦</span>
+                Kategoriyalar
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="mini-profile">
+
+                <div class="avatar">F</div>
+
+                <div>
+                    <strong>Foydalanuvchi</strong>
+                    <small>Shaxsiy hisob</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ASOSIY QISM -->
+    <main class="main">
+
+        <!-- YUQORI PANEL -->
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">SHAXSIY MOLIYA</p>
+                <h1 id="pageTitle">Bosh sahifa</h1>
+            </div>
+
+            <button class="add-btn" id="openModal">
+                <span>＋</span>
+                Tranzaksiya qo‘shish
+            </button>
+
+        </header>
+
+
+        <!-- ================= BOSH SAHIFA ================= -->
+
+        <section id="dashboard" class="section active-section">
+
+            <div class="balance-card">
+
+                <div>
+                    <p>Jami balans</p>
+
+                    <h2 id="balance">0 so‘m</h2>
+
+                    <span class="balance-status">
+                        Mavjud mablag‘
+                    </span>
+                </div>
+
+                <div class="balance-icon">₿</div>
+
+            </div>
+
+
+            <!-- STATISTIKA -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Daromad</span>
+                        <div class="stat-icon income">↑</div>
+                    </div>
+
+                    <h3 id="income">0 so‘m</h3>
+
+                    <p>Jami daromad</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Xarajat</span>
+                        <div class="stat-icon expense">↓</div>
+                    </div>
+
+                    <h3 id="expense">0 so‘m</h3>
+
+                    <p>Jami xarajat</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Tranzaksiyalar</span>
+                        <div class="stat-icon">↔</div>
+                    </div>
+
+                    <h3 id="transactionCount">0</h3>
+
+                    <p>Jami operatsiyalar</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="content-grid">
+
+                <!-- SO‘NGGI TRANZAKSIYALAR -->
+
+                <div class="panel large-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="panel-label">TARIX</p>
+                            <h2>So‘nggi tranzaksiyalar</h2>
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            data-section-link="transactions"
+                        >
+                            Barchasini ko‘rish →
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="recentTransactions"
+                        class="transaction-list"
+                    ></div>
+
+                </div>
+
+
+                <!-- TEZKOR QO‘SHISH -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="panel-label">TEZKOR AMAL</p>
+                            <h2>Tezkor qo‘shish</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <button
+                            class="quick income-btn"
+                            data-type="income"
+                        >
+
+                            <span>＋</span>
+
+                            <div>
+                                <strong>Daromad</strong>
+                                <small>Pul kirimini qo‘shish</small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            class="quick expense-btn"
+                            data-type="expense"
+                        >
+
+                            <span>−</span>
+
+                            <div>
+                                <strong>Xarajat</strong>
+                                <small>Sarflangan pulni yozish</small>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- XARAJAT KATEGORIYALARI -->
+
+            <div class="panel category-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="panel-label">XARAJATLAR</p>
+                        <h2>Xarajat kategoriyalari</h2>
+                    </div>
+
+                </div>
+
+                <div
+                    id="categorySummary"
+                    class="category-grid"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TRANZAKSIYALAR ================= -->
+
+        <section id="transactions" class="section">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="panel-label">BARCHA YOZUVLAR</p>
+                        <h2>Tranzaksiyalar</h2>
+                    </div>
+
+                    <div class="filters">
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Qidirish..."
+                        >
+
+                        <select id="filterType">
+
+                            <option value="all">
+                                Barchasi
+                            </option>
+
+                            <option value="income">
+                                Daromad
+                            </option>
+
+                            <option value="expense">
+                                Xarajat
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+                            <th>Tranzaksiya</th>
+                            <th>Kategoriya</th>
+                            <th>Sana</th>
+                            <th>Turi</th>
+                            <th>Summa</th>
+                            <th></th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="transactionTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TAHLIL ================= -->
+
+        <section id="analytics" class="section">
+
+            <div class="analytics-grid">
+
+                <div class="panel chart-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="panel-label">UMUMIY KO‘RINISH</p>
+                            <h2>Daromad va xarajat</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="bars">
+
+                        <div class="bar-group">
+
+                            <div
+                                class="bar income-bar"
+                                id="incomeBar"
+                            ></div>
+
+                            <span>Daromad</span>
+
+                        </div>
+
+
+                        <div class="bar-group">
+
+                            <div
+                                class="bar expense-bar"
+                                id="expenseBar"
+                            ></div>
+
+                            <span>Xarajat</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="panel-label">HISOBOT</p>
+                            <h2>Moliya holati</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-list">
+
+                        <div>
+                            <span>Jami daromad</span>
+                            <strong id="analyticsIncome">
+                                0 so‘m
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Jami xarajat</span>
+                            <strong id="analyticsExpense">
+                                0 so‘m
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Qoldiq</span>
+                            <strong id="analyticsBalance">
+                                0 so‘m
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Tranzaksiyalar</span>
+                            <strong id="analyticsTransactions">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= KATEGORIYALAR ================= -->
+
+        <section id="categories" class="section">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="panel-label">BO‘LIMLAR</p>
+                        <h2>Kategoriyalar</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    <div class="category-card">
+                        <span>🍔</span>
+                        <strong>Oziq-ovqat</strong>
+                        <small>Ovqatlanish xarajatlari</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>🏠</span>
+                        <strong>Uy-joy</strong>
+                        <small>Uy xarajatlari</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>🚕</span>
+                        <strong>Transport</strong>
+                        <small>Yo‘l xarajatlari</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>💻</span>
+                        <strong>Ish</strong>
+                        <small>Ish bilan bog‘liq</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>🛍️</span>
+                        <strong>Xaridlar</strong>
+                        <small>Sotib olingan narsalar</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>🎓</span>
+                        <strong>Ta’lim</strong>
+                        <small>O‘qish xarajatlari</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>🎮</span>
+                        <strong>Ko‘ngilochar</strong>
+                        <small>Dam olish</small>
+                    </div>
+
+                    <div class="category-card">
+                        <span>📦</span>
+                        <strong>Boshqa</strong>
+                        <small>Boshqa xarajatlar</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal-overlay" id="modal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="panel-label">YANGI YOZUV</p>
+                <h2>Tranzaksiya qo‘shish</h2>
+            </div>
+
+            <button
+                class="close-btn"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="transactionForm">
+
+            <div class="type-switch">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="type"
+                        value="income"
+                        checked
+                    >
+
+                    <span>Daromad</span>
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="type"
+                        value="expense"
+                    >
+
+                    <span>Xarajat</span>
+
+                </label>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Nomi</label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Masalan: Oylik maosh"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>Summa</label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="0"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Sana</label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Kategoriya</label>
+
+                <select id="category">
+
+                    <option value="Maosh">
+                        Maosh
+                    </option>
+
+                    <option value="Oziq-ovqat">
+                        Oziq-ovqat
+                    </option>
+
+                    <option value="Uy-joy">
+                        Uy-joy
+                    </option>
+
+                    <option value="Transport">
+                        Transport
+                    </option>
+
+                    <option value="Ish">
+                        Ish
+                    </option>
+
+                    <option value="Xaridlar">
+                        Xaridlar
+                    </option>
+
+                    <option value="Ta’lim">
+                        Ta’lim
+                    </option>
+
+                    <option value="Ko‘ngilochar">
+                        Ko‘ngilochar
+                    </option>
+
+                    <option value="Boshqa">
+                        Boshqa
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Izoh</label>
+
+                <textarea
+                    id="note"
+                    placeholder="Qo‘shimcha izoh..."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="submit-btn"
+                type="submit"
+            >
+                Tranzaksiyani saqlash
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
